@@ -2,10 +2,14 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import LogIn from "./LogIn";
 import SignUp from "./SignUp";
+import Home from "./Home";
+import Profile from "./Pages/profile";
+
+// require('dotenv').config()
 
 function App() {
   
-  
+  console.log(process.env.REACT_APP_PUBLIC_FOLDER);
    
   return (
     <div className="App">
@@ -13,7 +17,7 @@ function App() {
         <div className="content">
             <Switch>
               <Route exact path="/">
-
+                <Home />
               </Route>
 
               <Route path="/login">
@@ -24,8 +28,8 @@ function App() {
                 <SignUp />
               </Route>
 
-              <Route path="/dishes/:id">
-
+              <Route path="/profile/:username">
+                <Profile />
               </Route>
               <Route path="/about">
 

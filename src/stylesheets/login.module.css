@@ -38,7 +38,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* background-image: url("../asset/restaurant.png"); */
+  margin: 20% auto;
   background-repeat: no-repeat;
 }
 
@@ -75,6 +75,10 @@
 
 .form-control button:hover {
   background-color: #6d4e4e;
+}
+
+.span{
+  font-size: 12px;
 }
 
 @media only screen and (max-width: 550px) {

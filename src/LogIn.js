@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "./redux/action/userAction";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styles from './stylesheets/login.module.css'
 
 const LogIn = () => {
@@ -33,7 +33,7 @@ const LogIn = () => {
     <div>
     <div className={styles["login-page"]}>
       <div className={styles["image-container"]}>
-      <img className={styles['img']} src="/assets/Hamburger-SignUp.jpg" />
+        <img className={styles['img']} src="/assets/Hamburger-SignUp.jpg" />
       </div>
       <form className={styles.form} onSubmit={handleSubmit}>
         <h2>Sign In</h2>
@@ -62,6 +62,7 @@ const LogIn = () => {
         <div className={styles["form-control"]}>
           <button type="submit">Login</button>
         </div>
+        <span className={styles["span"]}>No account? <Link to="/signup"> Create An Account </Link></span>
       </form>
     </div>
     </div>
