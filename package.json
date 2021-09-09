@@ -34,6 +34,7 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
+    "timeago.js": "^4.0.2",
     "web-vitals": "^1.0.1",
     "webpack-cli": "^4.8.0"
   },
@@ -82,5 +83,5 @@
     "react-app-env": "^1.2.3",
     "react-test-render": "^1.1.2"
   },
-  "proxy":"http://localhost:8800/api"
+  "proxy": "http://127.0.0.1:8800/api"
 }

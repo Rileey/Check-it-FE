@@ -1,7 +1,7 @@
 import { loginTypes } from "../type/loginType";
 
 const savedUser = JSON.parse(localStorage.getItem("userToken") || "{}");
-const initialState = {
+export const initialState = {
   isAuthenticated: !!savedUser?._id,
   user: {},
   isLoading: false,

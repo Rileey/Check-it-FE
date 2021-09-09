@@ -1,15 +1,28 @@
 /* eslint react/prop-types: 0 */
 import { FavoriteOutlined, MoreVert } from "@material-ui/icons";
 import styles from "../stylesheets/post.module.css";
-import {Users} from "../dummyData"
-import { useState } from "react";
-// import env from "react-dotenv"
-// env.config()
+// import {Users} from "../dummyData"
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { format } from "timeago.js"; 
+import { Link } from "react-router-dom";
 
-export default function Post({post}) {
-    const [like, setLike] = useState(post.like)
+export default function Post({ post }) {
+    const [like, setLike] = useState(post.likes.length)
     const [isLiked, setIsLiked] = useState(false)
+    const [profile, setProfile] = useState({});
     const PF = process.env.REACT_APP_PUBLIC_FOLDER
+
+    useEffect(() => {
+        const fetchProfile = async () =>{
+        const res = await axios.get(`/profile?profileId=${post._creator}`)
+        setProfile(res.data.profile)
+        console.log(res.data.profile)
+        }
+        fetchProfile();
+    }, [post._creator]);
+
+
     const likeHandler=()=>{
         setLike(isLiked ? like-1 : like+1)
         setIsLiked(!isLiked)
@@ -19,9 +32,12 @@ export default function Post({post}) {
             <div className={styles.postWrapper}>
                 <div className={styles.postTop}>
                     <div className={styles.postTopLeft}>
-                        <img className={styles.postProfileImg} src={Users.filter(u=>u.id===post.userId)[0].profilePicture} alt="" />
-                        <span className={styles.postUsername}>{Users.filter(u=>u.id===post.userId)[0].username}</span>
-                        <span className={styles.postDate}>{post.dates}</span>
+                        <Link to={`profiles/${profile.name}`}>
+                            <img className={styles.postProfileImg} 
+                            src={profile.profilePicture || `${PF}pill.jpg`} alt="" />
+                        </Link>
+                        <span className={styles.postUsername}>{profile.name}</span>
+                        <span className={styles.postDate}>{format(post.createdAt)}</span>
                     </div>
                     <div className={styles.postTopRight}>
                         <MoreVert />
@@ -29,7 +45,7 @@ export default function Post({post}) {
                 </div>
                 <div className={styles.postCenter}>
                     <span className={styles.postText}>{post?.text}</span>
-                    <img className={styles.postImg} src={PF+post.photo} alt="" />
+                    <img className={styles.postImg} src={PF+post.image} alt="" />
                 </div>
                 <div className={styles.postBottom}>
                     <div className={styles.postBottomLeft}>
@@ -37,7 +53,7 @@ export default function Post({post}) {
                         <span className={styles.postLikeCounter}>{like} people like it</span>
                     </div>
                     <div className={styles.postBottomRight}>
-                        <span className={styles.postCommentText}>{post.comment} Comments</span>
+                        <span className={styles.postCommentText}>{post._comments.length} Comments</span>
                     </div>
                 </div>
             </div>

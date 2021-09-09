@@ -28,11 +28,14 @@ export default function RightBar({profile}) {
             <div className={styles.rightBarInfo}>
                <div className={styles.rightBarInfoItem}>
                    <span className={styles.rightBarInfoKey}>State:</span>
-                   <span className={styles.rightBarInfoValue}>Lagos</span>
+                   <span className={styles.rightBarInfoValue}>{profile.city}</span>
                </div>
                <div className={styles.rightBarInfoItem}>
-                   <span className={styles.rightBarInfoKey}>From:</span>
-                   <span className={styles.rightBarInfoValue}>Abeokuta</span>
+                   <span className={styles.rightBarInfoKey}>Relationship:</span>
+                   <span className={styles.rightBarInfoValue}>{profile.relationship===1 
+                   ? "Single" : profile.relationship===2 
+                   ? "In a relatonship" 
+                   : "It's complicated"}</span>
                </div>      
             </div>
             <h4 className={styles.rightbarTitle}>Communities</h4>

@@ -1,13 +1,5 @@
 .container {
-  background-color: #fff;
-}
-.first {
-  /* position: relative; */
-  height: 100vh;
-  display: inline-block;
-  width: 35%;
-  overflow: hidden;
-  margin-bottom: -0.49rem;
+  background-color: black;
 }
 
 .image {
@@ -15,10 +7,6 @@
   width: 100%;
   position: relative;
   display: flex;
-}
-
-.img {
-  width: 100%;
 }
 
 .image .img2{
@@ -50,47 +38,20 @@
 .second {
   height: 100vh;
   display: inline-block;
-  width: 65%;
+  width: 100%;
   overflow: hidden;
   margin-bottom: -0.439rem;
 }
 
 .details {
-  margin: 20% auto;
+  margin: 50% auto;
   width: 60%;
   text-align: center;
   padding: 20px 0;
 }
 
 .h5{
-  font-size: 1.2rem;
-}
-
-.googlebutton {
-  margin: 20px 0;
-}
-
-.googlebutton > button {
-  padding: 0.75rem 0;
-  background-color: #fff;
-  border-radius: 0.313rem;
-  border: 1px solid black;
-  width: 100%;
-}
-
-.googlebutton > button:hover {
-  padding: 0.75rem 0;
-  background-color: #000;
-  border-radius: 0.313rem;
-  border: 1px solid black;
   color: #fff;
-  cursor: pointer;
-}
-
-.FaGoogle{
-  display: inline-block;
-  padding: 0 0.375rem 0 0;
-  position: inherit;
   font-size: 1.2rem;
 }
 
@@ -109,6 +70,7 @@
 }
 
 .name {
+  color: #fff;
   padding: 0 0.313rem;
   font-size: 1.2rem;
   font-weight: 600;
@@ -117,6 +79,7 @@
 }
 
 .email {
+  color: #fff;
   padding: 0 0.313rem;
   font-size: 1.2rem;
   font-weight: 600;
@@ -125,6 +88,7 @@
 }
 
 .password {
+  color: #fff;
   padding: 0 0.313rem;
   font-size: 1.2rem;
   font-weight: 600;
@@ -133,6 +97,7 @@
 }
 
 .confirmPassword {
+  color: #fff;
   padding: 0 0.313rem;
   font-size: 1.2rem;
   font-weight: 600;
@@ -184,7 +149,13 @@
 }
 
 .section0 {
+  color: #fff;
   margin-bottom: 1.5rem;
+}
+
+.section0 > input[type=text]{
+  background-color: rgb(7, 7, 7);
+  color: white;
 }
 
 .section0 > .name > span{
@@ -196,6 +167,11 @@
   margin: 1.5rem 0;
 }
 
+.section1 > input[type=email]{
+  background-color: rgb(7, 7, 7);
+  color: white;
+}
+
 .section1 > .email> span{
   font-size: 1.2rem;
   color: red;
@@ -205,12 +181,22 @@
   margin: 1.5rem 0;
 }
 
+.section2 > input[type=password]{
+  background-color: rgb(7, 7, 7);
+  color: white;
+}
+
 .section2 > .password > span{
   font-size: 1.2rem;
   color: red;
 }
 .section3 {
   margin: 1.5rem 0;
+}
+
+.section3 > input[type=password]{
+  background-color: rgb(7, 7, 7);
+  color: white;
 }
 
 .section3 > .confirmPassword > span{
@@ -228,10 +214,10 @@
 }
 
 .section4 > button {
-  background-color: #000;
+  background-color: white;
   border-radius: 0.313rem;
   border: 1px solid black;
-  color: #fff;
+  color: rgb(7, 7, 7);
   width: 100%;
   cursor: pointer;
   height: 3rem;
@@ -243,25 +229,10 @@
 }
 
 .loginrdr {
-  color: #000;
+  color: #fff;
   font-size: 1.2rem;
 }
 
-.restaurant {
-  position: absolute;
-  top: 72%;
-  right: 5%;
-  height: 10rem;
-  transform: rotate(-12deg);
-}
-
-.restaurant2 {
-  position: absolute;
-  top: 5%;
-  right: 50%;
-  height: 10rem;
-  transform: rotate(40deg);
-}
 
 
 @media (min-width: 1400px) and (max-width: 2000px) {
@@ -343,8 +314,8 @@
 
 @media (min-width: 960px) and (max-width: 1400px) {
   .details {
-      margin: 22% auto;
-      width: 60%;
+      margin: 12% auto;
+      width: 50%;
     }
 
     .btn {
@@ -448,8 +419,8 @@
 
 @media (min-width: 750px) and (max-width: 960px) {
   .details {
-      margin: 22% auto;
-      width: 75%;
+      margin: 15% auto;
+      width: 60%;
     }
   
   .form {
@@ -513,7 +484,7 @@
     }
     .details {
       width: 70%;
-      margin: 29% auto;
+      margin: 18% auto;
     }
 
     .form {
@@ -546,16 +517,6 @@
 }
 
 @media (min-width: 500px) and (max-width: 550px) {
-  .first {
-  height: 100vh;
-  display: inline-block;
-  width: 40%;
-  overflow: hidden;
-  margin-bottom: -0.5rem;
-  }
-  .second{
-    width: 60%;
-  }
   .googlebutton {
     margin: 0.563rem 0;
   }  
@@ -567,7 +528,7 @@
     font-size: 1.2rem;
   }
   .details {
-    margin: 42% auto;
+    margin: 25% auto;
     width: 70%;
   }
 

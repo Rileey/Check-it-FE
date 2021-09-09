@@ -5,11 +5,9 @@ import SignUp from "./SignUp";
 import Home from "./Home";
 import Profile from "./Pages/profile";
 
-// require('dotenv').config()
 
 function App() {
   
-  console.log(process.env.REACT_APP_PUBLIC_FOLDER);
    
   return (
     <div className="App">
@@ -28,7 +26,7 @@ function App() {
                 <SignUp />
               </Route>
 
-              <Route path="/profile/:username">
+              <Route path="/profiles/:name">
                 <Profile />
               </Route>
               <Route path="/about">

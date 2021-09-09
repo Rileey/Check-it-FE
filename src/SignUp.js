@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { register } from './redux/action/signupAction';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { initialState } from "./redux/reducer/loginReducer";
+import { CircularProgress } from "@material-ui/core";
 
 
 const SignUp = () => {
@@ -61,17 +63,7 @@ const SignUp = () => {
 
   return (
     <div className={style.container}>
-      <div className={style.first}>
-        <div className={style.image}>
-          <img className={style.img} src="/assets/Hamburger-SignUp.jpg" />
-          <Link to="/">
-            <img className={style.img2} src="/assets/Vector.svg" />
-          </Link>
-        </div>
-      </div>
-      <div className={style.second}>
-        <img className={style.restaurant} src="/assets/restaurant.png" />
-        <img className={style.restaurant2} src="/assets/restaurant.png" />
+      <div className={style.second}>                
         <div className={style.details}>
           <div className={style.h5}>
             <h5>CREATE AN ACCOUNT</h5>
@@ -79,7 +71,7 @@ const SignUp = () => {
           <div className={style.form}>
             <form action="/" onSubmit={handleSubmit}>
               {submitted && valid ? (
-                <div className={style.success}>
+                <div className={style.success} style={{color:"#fff"}}>
                   Success! See you on the other side.
                 </div>
               ) : null}
@@ -165,7 +157,7 @@ const SignUp = () => {
               </div>
               <div className={style.section4}>
                 <button onClick={register} type="submit" className={style.btn2}>
-                  Sign Up
+                {submitted ? <CircularProgress color="#fff" size="6px" /> : "Sign Up"}
                 </button>
               </div>
               <span className={style.loginrdr}>Already have an account? <Link to="/login">Login Here</Link></span>
