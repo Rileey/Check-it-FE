@@ -2,28 +2,36 @@
 import { FavoriteOutlined, MoreVert } from "@material-ui/icons";
 import styles from "../stylesheets/post.module.css";
 // import {Users} from "../dummyData"
-import { useEffect, useState } from "react";
+import { useEffect, useContext, useState } from "react";
 import axios from "axios";
 import { format } from "timeago.js"; 
 import { Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext"
 
 export default function Post({ post }) {
     const [like, setLike] = useState(post.likes.length)
     const [isLiked, setIsLiked] = useState(false)
     const [profile, setProfile] = useState({});
     const PF = process.env.REACT_APP_PUBLIC_FOLDER
+    const { user:currentUser } = useContext(AuthContext)
 
     useEffect(() => {
         const fetchProfile = async () =>{
         const res = await axios.get(`/profile?profileId=${post._creator}`)
         setProfile(res.data.profile)
-        console.log(res.data.profile)
+        // console.log(res.data.profile)
         }
         fetchProfile();
     }, [post._creator]);
 
 
     const likeHandler=()=>{
+        try {
+            axios.put('/posts/'+ post._id + '/like', { userId: currentUser._id})
+        } catch (err) {
+            
+        }
+
         setLike(isLiked ? like-1 : like+1)
         setIsLiked(!isLiked)
     }
@@ -34,7 +42,7 @@ export default function Post({ post }) {
                     <div className={styles.postTopLeft}>
                         <Link to={`profiles/${profile.name}`}>
                             <img className={styles.postProfileImg} 
-                            src={profile.profilePicture || `${PF}pill.jpg`} alt="" />
+                            src={profile.profilePicture ? PF + profile.profilePicture : `${PF}pill.jpg`} alt="" />
                         </Link>
                         <span className={styles.postUsername}>{profile.name}</span>
                         <span className={styles.postDate}>{format(post.createdAt)}</span>

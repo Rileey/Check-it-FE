@@ -11,13 +11,11 @@ import styles from "../stylesheets/profile.module.css"
 export default function Profile() {
     const [profile, setProfile] = useState({});
     const name = useParams().name;
-    // console.log(params.name)
 
     useEffect(() => {
         const fetchProfile = async () =>{
-        const res = await axios.get(`/profile?name={name}`)
+        const res = await axios.get(`/profile?name=${name}`)
         setProfile(res.data.profile)
-        console.log(res.data.profile)
         }
         fetchProfile();
     }, [name]);
@@ -34,11 +32,11 @@ export default function Profile() {
                     <div className={styles.profileCover}>
                         <img 
                         className={styles.profileCoverImg} 
-                        src={profile.coverPicture || PF+"portal.jpg"} 
+                        src={profile.coverPicture ? PF + profile.coverPicture : PF+"portal.jpg"} 
                         alt="" />
                         <img 
                         className={styles.profileUserImg} 
-                        src={profile.profilePicture || PF+"pill.jpg"} 
+                        src={profile.profilePicture ? PF + profile.profilePicture : PF+"pill.jpg"} 
                         alt="" />
                     </div>
                     <div className={styles.profileInfo}>

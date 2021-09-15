@@ -1,65 +1,81 @@
 import style from "./stylesheets/signup.module.css";
-import React, { useState } from "react";
+import React, { useState, useRef, useContext } from "react";
 import { Link } from "react-router-dom";
 import { register } from './redux/action/signupAction';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { initialState } from "./redux/reducer/loginReducer";
 import { CircularProgress } from "@material-ui/core";
-
-
+import { AuthContext } from "./context/AuthContext";
+import axios from "axios"
 const SignUp = () => {
 
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const history = useHistory();
 
-  const [values, setValues] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
+  // const [values, setValues] = useState({
+  //   name: "",
+  //   email: "",
+  //   password: "",
+  //   confirmPassword: "",
+  // });
+  const name = useRef();
+  const password = useRef();
+  const email = useRef();
+  const confirmPassword = useRef();
+  const {user, isFetching, error, dispatch} = useContext(AuthContext);
 
-  const {name, email, password, confirmPassword} = values;
+  // const {name, email, password, confirmPassword} = values;
   const [submitted, setSubmitted] = useState(false);
   const [valid, SetValid] = useState(false);
 
-  const handleNameInputChange = (event) => {
-    setValues({ ...values, name: event.target.value });
-  };
+  // const handleNameInputChange = (event) => {
+  //   setValues({ ...values, name: event.target.value });
+  // };
 
-  const handleEmailInputChange = (event) => {
-    setValues({ ...values, email: event.target.value });
-  };
+  // const handleEmailInputChange = (event) => {
+  //   setValues({ ...values, email: event.target.value });
+  // };
 
-  const handlePasswordInputChange = (event) => {
-    setValues({ ...values, password: event.target.value });
-  };
+  // const handlePasswordInputChange = (event) => {
+  //   setValues({ ...values, password: event.target.value });
+  // };
 
-  const handleConfirmPasswordInputChange = (event) => {
-    setValues({ ...values, confirmPassword: event.target.value });
-  };
+  // const handleConfirmPasswordInputChange = (event) => {
+  //   setValues({ ...values, confirmPassword: event.target.value });
+  // };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (
-      values.name &&
-      values.email &&
-      values.password &&
-      values.confirmPassword &&
-      values.confirmPassword === values.password &&
-      values.password.length > 6 &&
-      values.password.match(/^[0-9A-Za-z]+$/)
+    name.current.value &&
+    email.current.value &&
+    password.current.value  &&
+    confirmPassword.current.value  &&
+    confirmPassword.current.value  === password.current.value  &&
+    password.current.value .length > 6 &&
+    password.current.value .match(/^[0-9A-Za-z]+$/)
     ) {
       SetValid(true);
     }
     setSubmitted(true);
-
-    dispatch(register(name, email, password, confirmPassword, history))
+    const user = {
+      name: name.current.value,
+      email: email.current.value,
+      password: password.current.value
+    }
+    try {
+      await axios.post("/register", user)
+      history.push("/login")
+    } catch (err) {
+      console.log(err)
+    }
+    
+    // dispatch(register(name, email, password, confirmPassword, history))
   }
 
-
+  
 
   return (
     <div className={style.container}>
@@ -78,14 +94,15 @@ const SignUp = () => {
               <div className={style.section0}>
                 <label className={style.name}>
                   Your name <br />
-                  {submitted && !values.name ? (
+                  {submitted && !name.current.value ? (
                     <span>Please enter your name</span>
                   ) : null}
                 </label>
                 <input
                   autoComplete="off"
-                  onChange={handleNameInputChange}
-                  value={values.name}
+                  ref={name}
+                  // onChange={handleNameInputChange}
+                  // value={values.name}
                   className={style.inputName}
                   type="text"
                   id="yourname"
@@ -97,14 +114,15 @@ const SignUp = () => {
                 <label className={style.email}>
                   Your email
                   <br />{" "}
-                  {submitted && !values.email ? (
+                  {submitted && !email.current.value ? (
                     <span>Please enter your email</span>
                   ) : null}
                 </label>
                 <input
                   autoComplete="off"
-                  onChange={handleEmailInputChange}
-                  value={values.email}
+                  ref={email}
+                  // onChange={handleEmailInputChange}
+                  // value={values.email}
                   className={style.inputEmail}
                   type="email"
                   id="mail"
@@ -116,17 +134,18 @@ const SignUp = () => {
                 <label className={style.password}>
                   Your password
                   <br />{" "}
-                  {submitted && !values.password ? (
+                  {submitted && !password.current.value ? (
                     <span>Please enter a password</span>
-                  ) : submitted && (values.password.length < 7) ? 
+                  ) : submitted && (password.current.value.length < 7) ? 
                   <span> Password should not be less than 7 characters</span>
-                   : submitted && (!values.password.match(/^[0-9A-Za-z]+$/)) ? 
+                   : submitted && (!password.current.value.match(/^[0-9A-Za-z]+$/)) ? 
                    <span className={style.alpha}> Password must be alpha numeric characters</span> : null}
                 </label>
                 <input
                   autoComplete="off"
-                  onChange={handlePasswordInputChange}
-                  value={values.password}
+                  ref={password}
+                  // onChange={handlePasswordInputChange}
+                  // value={values.password}
                   type="password"
                   id="pword"
                   name="password"
@@ -138,16 +157,17 @@ const SignUp = () => {
                 <label className={style.confirmPassword}>
                   Confirm password
                   <br />{" "}
-                  {submitted && !values.confirmPassword ? (
+                  {submitted && !confirmPassword.current.value ? (
                     <span>Please confirm your password</span>
-                  ) : submitted && values.confirmPassword !== values.password ?
-                   <span> Password not a match</span> : submitted && (!values.password.match(/^[0-9A-Za-z]+$/)) ? 
+                  ) : submitted && confirmPassword.current.value !== password.current.value ?
+                   <span> Password not a match</span> : submitted && (!password.current.value.match(/^[0-9A-Za-z]+$/)) ? 
                    <span className={style.alpha}> Password must be alpha numeric characters</span> : null}
                 </label>
                 <input
                   autoComplete="off"
-                  onChange={handleConfirmPasswordInputChange}
-                  value={values.confirmPassword}
+                  ref={confirmPassword}
+                  // onChange={handleConfirmPasswordInputChange}
+                  // value={values.confirmPassword}
                   type="password"
                   id="Cpword"
                   name="confirmPassword"
@@ -157,7 +177,7 @@ const SignUp = () => {
               </div>
               <div className={style.section4}>
                 <button onClick={register} type="submit" className={style.btn2}>
-                {submitted ? <CircularProgress color="#fff" size="6px" /> : "Sign Up"}
+                {isFetching ? <CircularProgress color="#fff" size="10px" /> : "Sign Up"}
                 </button>
               </div>
               <span className={style.loginrdr}>Already have an account? <Link to="/login">Login Here</Link></span>
