@@ -14,7 +14,7 @@ export default function Community() {
 
     useEffect(() => {
         const fetchCommunity = async () =>{
-        const res = await axios.get(`${baseUrl}/api/community?name=art`)
+        const res = await axios.get(`${baseUrl}/api/community?name=name`)
         setCommunity(res.data.community)
         }
         fetchCommunity();

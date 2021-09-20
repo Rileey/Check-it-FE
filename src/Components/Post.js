@@ -18,7 +18,6 @@ export default function Post({ post }) {
 
     useEffect(() => {
         const fetchProfile = async () =>{
-        // const res = await axios.get(`${baseUrl}/profile?profileId=${post._creator}`)
         const res = await axios.get(baseUrl + '/api/profile?profileId=' + post._creator)
         setProfile(res.data.profile)
         console.log(res.data.profile)
@@ -31,7 +30,7 @@ export default function Post({ post }) {
         try {
             axios.put(baseUrl + '/posts/'+ post._id + '/like', { userId: user._id})
         } catch (err) {
-            
+            console.log(err)
         }
 
         setLike(isLiked ? like-1 : like+1)

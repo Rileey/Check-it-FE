@@ -14,10 +14,6 @@ export default function SideBar() {
                         <span className={styles.text}>Videos</span>
                     </li>
                     <li className={styles.sidebarListItem}>
-                        <Group className={styles.sidebarIcon} />
-                        <span className={styles.text}>Groups</span>
-                    </li>
-                    <li className={styles.sidebarListItem}>
                         <Bookmark className={styles.sidebarIcon} />
                         <span className={styles.text}>Bookmarks</span>
                     </li>
