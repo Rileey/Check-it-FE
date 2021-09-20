@@ -1,6 +1,6 @@
 import React from "react";
 import styles from"../stylesheets/sidebar.module.css";
-import { Bookmark, Event, Group, PlayCircleFilledOutlined, RssFeed, School, WorkOutline } from "@material-ui/icons"
+import { Bookmark, Event, Group, PlayCircleFilledOutlined, School, WorkOutline } from "@material-ui/icons"
 import {Users} from "../dummyData"
 import CloseFriend from "./CloseFriend";
 
@@ -9,10 +9,6 @@ export default function SideBar() {
         <div className={styles.sidebar}>
             <div className={styles.sidebarWrapper}>
                 <ul className={styles.sidebarList}>
-                    <li className={styles.sidebarListItem}>
-                        <RssFeed className={styles.sidebarIcon} />
-                        <span className={styles.text}>Feed</span>
-                    </li>
                     <li className={styles.sidebarListItem}>
                         <PlayCircleFilledOutlined className={styles.sidebarIcon} />
                         <span className={styles.text}>Videos</span>

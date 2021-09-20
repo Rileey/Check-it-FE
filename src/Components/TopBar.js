@@ -22,10 +22,6 @@ export default function TopBar() {
                     <input className={styles.searchInput} placeholder="Search for anything..."/>                </div>
             </div>
             <div className={styles.topbarRight}>
-                <div className={styles.topbarLinks}>
-                    <span className={styles.topbarLink}>Homepage</span>
-                    <span className={styles.topbarLink}>Timeline</span>
-                </div>
                 <div className={styles.topbarIcons}>
                     <div className={styles.topbarIconItem}>
                         <Person />

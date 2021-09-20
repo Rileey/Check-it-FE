@@ -7,30 +7,15 @@ import { loginCall } from "./apiCalls";
 import { AuthContext } from "./context/AuthContext";
 
 const LogIn = () => {
-  // const dispatch = useDispatch();
-  // const history = useHistory();
-  // const [signinData, setsigninData] = useState({
-  //   email: "",
-  //   password: "",
-  // });
-
-  // const { email, password } = signinData;
   const email = useRef();
   const password = useRef();
   const {user, isFetching, error, dispatch} = useContext(AuthContext);
 
-  // const handleInput = (e) => {
-  //   const { name, value } = e.target;
-  //   setsigninData({
-  //     ...signinData,
-  //     [name]: value,
-  //   });
-  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     loginCall({email: email.current.value, password: password.current.value}, dispatch)
-    // dispatch(login(email, password, history));
+
 
   };
   return (
@@ -46,7 +31,6 @@ const LogIn = () => {
             ref={email}
             name="email"
             placeholder="email"
-            // onChange={handleInput}
             required
           />
         </div>
@@ -57,7 +41,6 @@ const LogIn = () => {
             name="password"
             placeholder="password"
             ref={password}
-            // onChange={handleInput}
             id="password"
             required
           />

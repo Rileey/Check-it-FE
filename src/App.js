@@ -4,6 +4,7 @@ import LogIn from "./LogIn";
 import SignUp from "./SignUp";
 import Home from "./Home";
 import Profile from "./Pages/profile";
+import Community from "./Pages/community";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext"
 
@@ -31,9 +32,10 @@ function App() {
               <Route path="/profiles/:name">
                 <Profile />
               </Route>
-              <Route path="/about">
 
-              </Route>
+              {/* <Route path="/community/:name">
+                <Community />
+              </Route> */}
 
             </Switch>
 

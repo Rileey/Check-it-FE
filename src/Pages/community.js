@@ -1,24 +1,23 @@
-import Feed from "../Components/Feed"
-import SideBar from "../Components/SideBar"
-import TopBar from "../Components/TopBar"
-import RightBar from "../Components/RightBar"
+import Feed from "../Components/Feed";
+import SideBar from "../Components/SideBar";
+import TopBar from "../Components/TopBar";
+import baseUrl from "../utils/BaseUrl";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router";
-import baseUrl from "../utils/BaseUrl";
 
 import styles from "../stylesheets/profile.module.css"
 
-export default function Profile() {
-    const [profile, setProfile] = useState({});
+export default function Community() {
+    const [community, setCommunity] = useState({});
     const name = useParams().name;
 
     useEffect(() => {
-        const fetchProfile = async () =>{
-        const res = await axios.get(`${baseUrl}/api/profile?name=${name}`)
-        setProfile(res.data.profile)
+        const fetchCommunity = async () =>{
+        const res = await axios.get(`${baseUrl}/api/community?name=art`)
+        setCommunity(res.data.community)
         }
-        fetchProfile();
+        fetchCommunity();
     }, [name]);
 
 
@@ -33,21 +32,20 @@ export default function Profile() {
                     <div className={styles.profileCover}>
                         <img 
                         className={styles.profileCoverImg} 
-                        src={profile.coverPicture ? PF + profile.coverPicture : PF+"portal.jpg"} 
+                        src={community.coverPicture ? PF + community.coverPicture : PF+"portal.jpg"} 
                         alt="" />
                         <img 
                         className={styles.profileUserImg} 
-                        src={profile.profilePicture ? PF + profile.profilePicture : PF+"pill.jpg"} 
+                        src={community.profilePicture ? PF + community.profilePicture : PF+"pill.jpg"} 
                         alt="" />
                     </div>
                     <div className={styles.profileInfo}>
-                        <h2 className={styles.profileInfoName}>{profile.name}</h2>
-                        <span className={styles.profileInfoDesription}>{profile.description}</span>
+                        <h2 className={styles.profileInfoName}>{community.name}</h2>
+                        <span className={styles.profileInfoDesription}>{community.description}</span>
                     </div>
                 </div>
                 <div className={styles.profileRightBottom}>
-                    <Feed name= {name}/>
-                    <RightBar profile={profile} />
+                    <Feed name={name}/>
                 </div>
             </div>
         </div>

@@ -7,19 +7,21 @@ import axios from "axios";
 import { format } from "timeago.js"; 
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext"
+import baseUrl from "../utils/BaseUrl"
 
 export default function Post({ post }) {
     const [like, setLike] = useState(post.likes.length)
     const [isLiked, setIsLiked] = useState(false)
-    const [profile, setProfile] = useState({});
+    const [profile, setProfile] = useState({})
     const PF = process.env.REACT_APP_PUBLIC_FOLDER
-    const { user:currentUser } = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
 
     useEffect(() => {
         const fetchProfile = async () =>{
-        const res = await axios.get(`/profile?profileId=${post._creator}`)
+        // const res = await axios.get(`${baseUrl}/profile?profileId=${post._creator}`)
+        const res = await axios.get(baseUrl + '/api/profile?profileId=' + post._creator)
         setProfile(res.data.profile)
-        // console.log(res.data.profile)
+        console.log(res.data.profile)
         }
         fetchProfile();
     }, [post._creator]);
@@ -27,7 +29,7 @@ export default function Post({ post }) {
 
     const likeHandler=()=>{
         try {
-            axios.put('/posts/'+ post._id + '/like', { userId: currentUser._id})
+            axios.put(baseUrl + '/posts/'+ post._id + '/like', { userId: user._id})
         } catch (err) {
             
         }

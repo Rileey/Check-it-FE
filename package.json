@@ -82,6 +82,5 @@
     "prettier": "^2.2.1",
     "react-app-env": "^1.2.3",
     "react-test-render": "^1.1.2"
-  },
-  "proxy": "http://127.0.0.1:8800/api"
+  }
 }

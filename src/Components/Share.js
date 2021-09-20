@@ -3,6 +3,7 @@ import { EmojiEmotions, Label, PermMedia, Room } from "@material-ui/icons"
 import { AuthContext } from "../context/AuthContext"
 import { useContext, useRef, useState } from "react"
 import axios from "axios";
+import baseUrl from "../utils/BaseUrl";
 
 export default function Share() {
 
@@ -25,14 +26,14 @@ export default function Share() {
             newPost.image = fileName;
             console.log(newPost)
             try {
-                await axios.post('/upload', data)
+                await axios.post(baseUrl + '/api/upload', data)
             } catch (err) {
+                windows.location.reload()
                 console.log(err)
             }
         }
         try{
-            await axios.post('/post', newPost)
-            window.location.reload()
+            await axios.post(baseUrl + '/api/post', newPost)
         }catch(err){
             console.log({message: err})
         }
@@ -54,10 +55,6 @@ export default function Share() {
                             <span className={styles.shareOptionText}>Photo</span>
                             <input style={{display: "none"}} type="file" id="file" accept=".png,.jpg,.jpeg" onChange={(e)=>setFile(e.target.files[0])} />
                         </label>
-                        <div className={styles.shareOption}>
-                            <Label className={styles.shareIcon} />
-                            <span className={styles.shareOptionText}>Link</span>
-                        </div>
                     </div>
                     <button className={styles.shareButton} type="submit">Check-It</button>
                 </form>

@@ -1,50 +1,27 @@
 import style from "./stylesheets/signup.module.css";
 import React, { useState, useRef, useContext } from "react";
 import { Link } from "react-router-dom";
-import { register } from './redux/action/signupAction';
-import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { initialState } from "./redux/reducer/loginReducer";
 import { CircularProgress } from "@material-ui/core";
 import { AuthContext } from "./context/AuthContext";
-import axios from "axios"
+import baseUrl from "./utils/BaseUrl";
+import axios from "axios";
+
+
+
 const SignUp = () => {
 
 
-  // const dispatch = useDispatch();
   const history = useHistory();
 
-  // const [values, setValues] = useState({
-  //   name: "",
-  //   email: "",
-  //   password: "",
-  //   confirmPassword: "",
-  // });
   const name = useRef();
   const password = useRef();
   const email = useRef();
   const confirmPassword = useRef();
   const {user, isFetching, error, dispatch} = useContext(AuthContext);
 
-  // const {name, email, password, confirmPassword} = values;
   const [submitted, setSubmitted] = useState(false);
   const [valid, SetValid] = useState(false);
-
-  // const handleNameInputChange = (event) => {
-  //   setValues({ ...values, name: event.target.value });
-  // };
-
-  // const handleEmailInputChange = (event) => {
-  //   setValues({ ...values, email: event.target.value });
-  // };
-
-  // const handlePasswordInputChange = (event) => {
-  //   setValues({ ...values, password: event.target.value });
-  // };
-
-  // const handleConfirmPasswordInputChange = (event) => {
-  //   setValues({ ...values, confirmPassword: event.target.value });
-  // };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -66,13 +43,12 @@ const SignUp = () => {
       password: password.current.value
     }
     try {
-      await axios.post("/register", user)
+      await axios.post(baseUrl + "/api/register", user)
       history.push("/login")
     } catch (err) {
       console.log(err)
     }
     
-    // dispatch(register(name, email, password, confirmPassword, history))
   }
 
   
@@ -101,8 +77,6 @@ const SignUp = () => {
                 <input
                   autoComplete="off"
                   ref={name}
-                  // onChange={handleNameInputChange}
-                  // value={values.name}
                   className={style.inputName}
                   type="text"
                   id="yourname"
@@ -121,8 +95,6 @@ const SignUp = () => {
                 <input
                   autoComplete="off"
                   ref={email}
-                  // onChange={handleEmailInputChange}
-                  // value={values.email}
                   className={style.inputEmail}
                   type="email"
                   id="mail"
@@ -143,9 +115,7 @@ const SignUp = () => {
                 </label>
                 <input
                   autoComplete="off"
-                  ref={password}
-                  // onChange={handlePasswordInputChange}
-                  // value={values.password}
+                  ref={password}  
                   type="password"
                   id="pword"
                   name="password"
@@ -166,8 +136,6 @@ const SignUp = () => {
                 <input
                   autoComplete="off"
                   ref={confirmPassword}
-                  // onChange={handleConfirmPasswordInputChange}
-                  // value={values.confirmPassword}
                   type="password"
                   id="Cpword"
                   name="confirmPassword"
@@ -176,7 +144,7 @@ const SignUp = () => {
                 />
               </div>
               <div className={style.section4}>
-                <button onClick={register} type="submit" className={style.btn2}>
+                <button type="submit" className={style.btn2}>
                 {isFetching ? <CircularProgress color="#fff" size="10px" /> : "Sign Up"}
                 </button>
               </div>
