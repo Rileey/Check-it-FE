@@ -1,3 +1,3 @@
-const baseUrl = "http://fierce-ridge-91254.herokuapp.com";
+const baseUrl = "https://fierce-ridge-91254.herokuapp.com";
 
 export default baseUrl;
